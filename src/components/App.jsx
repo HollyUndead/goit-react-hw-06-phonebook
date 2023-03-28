@@ -3,11 +3,10 @@
 import { createContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { ContactItem } from './contacts/contactItem';
+import { ContactItem } from './contacts-item/contactItem';
 import { FormCreateContact } from './form/form';
 import { Filter } from './filter/filter';
 import { addContacts } from 'app/slice';
-import './contacts/contacts.css';
 
 export const StateContext = createContext();
 

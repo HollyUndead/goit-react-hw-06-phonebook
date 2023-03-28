@@ -16,7 +16,7 @@ export const stateSlice = createSlice({
     deleteContacts: (state, action) => {
       /* eslint-disable-next-line */
       state.contacts = state.contacts.filter(el => {
-        if (el.id !== action.payload.value) {
+        if (el.id !== action.payload) {
           return el;
         }
       });
