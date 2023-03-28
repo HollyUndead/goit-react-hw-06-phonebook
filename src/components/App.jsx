@@ -14,7 +14,7 @@ export const transformNumber = number => {
   let numberArr = number.split('');
   return `${numberArr.slice(0, 3).join('')}-${numberArr
     .slice(3, 5)
-    .join('')}-${numberArr.slice(5, 7).join('')}`;
+    .join('')}-${numberArr.slice(5).join('')}`;
 };
 
 export const App = () => {
