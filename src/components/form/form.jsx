@@ -13,10 +13,6 @@ export const FormCreateContact = () => {
     ev.preventDefault();
     const name = ev.target.name.value;
     const number = ev.target.number.value;
-    if (number.length !== 7) {
-      alert('Please, input valid phonenumber with 7 simbols');
-      return;
-    }
     const names = state.contacts.filter(el => {
       return el.name.toLowerCase() === name.toLowerCase();
     });
