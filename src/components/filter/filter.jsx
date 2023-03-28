@@ -1,13 +1,11 @@
-import { useContext } from 'react';
-
-import { StateContext } from 'components/App';
 import './filter.css';
+import { useDispatch } from 'react-redux';
+import { setFilter } from 'app/slice';
 
 export const Filter = () => {
-  const { setFilter } = useContext(StateContext);
-
-  const sendFilter = ev => {
-    setFilter(ev.target.value.toLowerCase());
+  const dispatch = useDispatch();
+  const setFilters = ev => {
+    dispatch(setFilter(ev.target.value));
   };
 
   return (
@@ -18,7 +16,7 @@ export const Filter = () => {
         className="filter-input"
         autoComplete="off"
         name="search"
-        onChange={sendFilter}
+        onChange={setFilters}
       />
     </div>
   );

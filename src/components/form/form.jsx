@@ -1,12 +1,15 @@
-import { useContext } from 'react';
+import { nanoid } from '@reduxjs/toolkit';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { StateContext } from 'components/App';
+import { addContacts } from 'app/slice';
+import { transformNumber } from 'components/App';
 import './fomr.css';
 
 export const FormCreateContact = () => {
-  const { setNewContact } = useContext(StateContext);
+  const dispatch = useDispatch();
+  const state = useSelector(state => state);
 
-  const createNewContact = ev => {
+  const addNewContact = ev => {
     ev.preventDefault();
     const name = ev.target.name.value;
     const number = ev.target.number.value;
@@ -14,11 +17,26 @@ export const FormCreateContact = () => {
       alert('Please, input valid phonenumber with 7 simbols');
       return;
     }
-    setNewContact({ name, number, ev });
+    const names = state.contacts.filter(el => {
+      return el.name.toLowerCase() === name.toLowerCase();
+    });
+    const numbers = state.contacts.filter(el => {
+      return Number(el.number) === Number(number);
+    });
+    if (names.length !== 0) {
+      alert(`${name} is already in contacts`);
+      return;
+    } else if (numbers.length !== 0) {
+      alert(`${transformNumber(number)} is already in contacts`);
+      return;
+    } else {
+      dispatch(addContacts([{ name, number, id: nanoid() }]));
+    }
+    ev.target.reset();
   };
 
   return (
-    <form onSubmit={createNewContact} className="form-contact">
+    <form onSubmit={addNewContact} className="form-contact">
       <label htmlFor="name">Name</label>
       <input
         type="text"

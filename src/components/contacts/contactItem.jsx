@@ -1,14 +1,15 @@
-import { useContext } from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 
-import { StateContext } from 'components/App';
+import { transformNumber } from 'components/App';
+import { deleteContacts } from 'app/slice';
 
 export const ContactItem = ({ ...props }) => {
   const { name, number, elementId } = props;
-  const { deleteFromState, transformNumber } = useContext(StateContext);
+  const dispatch = useDispatch();
 
   const deletContact = () => {
-    deleteFromState(elementId);
+    dispatch(deleteContacts(elementId));
   };
 
   return (
