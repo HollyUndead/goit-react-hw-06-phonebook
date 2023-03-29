@@ -1,12 +1,11 @@
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 
-import { transformNumber } from 'components/App';
 import { deleteContacts } from 'app/slice';
 import './contacts.css';
 
 export const ContactItem = ({ ...props }) => {
-  const { name, number, elementId } = props;
+  const { name, phone, elementId } = props;
   const dispatch = useDispatch();
 
   const deletContact = () => {
@@ -16,7 +15,7 @@ export const ContactItem = ({ ...props }) => {
   return (
     <li>
       <div className="contact-wrap">
-        {name}: {transformNumber(number)}
+        {name}: {phone}
         <button className="delete-contact" onClick={deletContact}>
           Delete
         </button>
@@ -26,7 +25,7 @@ export const ContactItem = ({ ...props }) => {
 };
 
 ContactItem.propTypes = {
-  number: PropTypes.string,
+  phone: PropTypes.string,
   name: PropTypes.string,
   elementId: PropTypes.string,
 };

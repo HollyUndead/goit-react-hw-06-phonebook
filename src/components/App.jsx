@@ -1,37 +1,17 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { createContext, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { createContext } from 'react';
+import { useSelector } from 'react-redux';
 
 import { ContactItem } from './contacts-item/contactItem';
 import { FormCreateContact } from './form/form';
 import { Filter } from './filter/filter';
-import { addContacts } from 'app/slice';
 
 export const StateContext = createContext();
-
-export const transformNumber = number => {
-  let numberArr = number.split('');
-  return `${numberArr.slice(0, 3).join('')}-${numberArr
-    .slice(3, 5)
-    .join('')}-${numberArr.slice(5).join('')}`;
-};
 
 export const App = () => {
   const contacts = useSelector(state => state.contacts);
   const filter = useSelector(state => state.filter);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const local = JSON.parse(localStorage.getItem('contacts'));
-    if (local !== null) {
-      dispatch(addContacts(local.contacts));
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('contacts', JSON.stringify({ contacts: contacts }));
-  }, [contacts]);
 
   return (
     <div
@@ -55,7 +35,7 @@ export const App = () => {
             return (
               <ContactItem
                 name={el.name}
-                number={el.number}
+                phone={el.phone}
                 elementId={el.id}
                 key={el.id}
               />

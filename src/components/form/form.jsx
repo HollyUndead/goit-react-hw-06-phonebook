@@ -2,7 +2,6 @@ import { nanoid } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { addContacts } from 'app/slice';
-import { transformNumber } from 'components/App';
 import './fomr.css';
 
 export const FormCreateContact = () => {
@@ -23,10 +22,10 @@ export const FormCreateContact = () => {
       alert(`${name} is already in contacts`);
       return;
     } else if (numbers.length !== 0) {
-      alert(`${transformNumber(number)} is already in contacts`);
+      alert(`${number} is already in contacts`);
       return;
     } else {
-      dispatch(addContacts([{ name, number, id: nanoid() }]));
+      dispatch(addContacts([{ name, phone: number, id: nanoid() }]));
     }
     ev.target.reset();
   };
